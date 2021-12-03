@@ -63,7 +63,7 @@ THIRD_APPS = [
 ]
 
 PROJECT_APPS = [
-
+    'apps.api',
 ]
 
 
