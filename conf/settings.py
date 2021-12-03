@@ -35,12 +35,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')  # 'django-insecure-oyz1ug!*6-*(remun8)gr8ljsw9l*4p$cy(fr4k4qr29n9)0@w'
+SECRET_KEY = 'django-insecure-oyz1ug!*6-*(remun8)gr8ljsw9l*4p$cy(fr4k4qr29n9)0@w'
+# SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = True
+# DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -155,8 +158,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ACTIVAR_HERRAMIENTAS_DESARROLLO = env.bool('ACTIVAR_HERRAMIENTAS_DESARROLLO', default=False)
-
+# ACTIVAR_HERRAMIENTAS_DESARROLLO = env.bool('ACTIVAR_HERRAMIENTAS_DESARROLLO', default=False)
+ACTIVAR_HERRAMIENTAS_DESARROLLO = True
 
 # --- DRF ---
 # Configuro para devolver los datos en formato jsonapi.
