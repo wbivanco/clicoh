@@ -6,7 +6,7 @@ from .viewsets import ProductViewSet, OrderViewSet, OrderDetailViewSet
 route = routers.SimpleRouter()
 route.register('product', ProductViewSet)
 route.register('order', OrderViewSet)
-route.register('order_detail', OrderDetailViewSet)
+route.register('orderdetail', OrderDetailViewSet)
 
 urlpatterns = route.urls
 

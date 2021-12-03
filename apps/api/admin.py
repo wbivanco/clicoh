@@ -13,7 +13,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class OrderDetailAdmin(admin.ModelAdmin):
-    list_display = ['cuantity', 'order', 'product']
+    list_display = ['quantity', 'order', 'product']
     list_filter = ['order']
     search_fields = ['order']
 

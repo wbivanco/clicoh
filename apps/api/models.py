@@ -23,7 +23,7 @@ class Order(models.Model):
 
 
 class OrderDetail(models.Model):
-    cuantity = models.IntegerField()
+    quantity = models.IntegerField()
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
