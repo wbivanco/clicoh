@@ -10,14 +10,16 @@ class Product(models.Model):
         return '{}'.format(self.name)
 
     class Meta:
-        verbose_name = "Productos"
+        verbose_name_plural = "Productos"
+        verbose_name = "Producto"
 
 
 class Order(models.Model):
     datetime = models.DateTimeField()
 
     class Meta:
-        verbose_name = "Ordenes"
+        verbose_name_plural = "Ordenes"
+        verbose_name = "Orden"
 
 
 class OrderDetail(models.Model):
@@ -30,4 +32,5 @@ class OrderDetail(models.Model):
         return '{} - {}'.format(self.order, self.product)
 
     class Meta:
-        verbose_name = "Detalle Ordenes"
+        verbose_name_plural = "Detalle Ordenes"
+        verbose_name = "Detalle Orden"

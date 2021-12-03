@@ -19,6 +19,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('apps.api.urls')),
 ]
 
 """ Si estan activas las herramientas de desarrollo agrego la ruta a debug. """
