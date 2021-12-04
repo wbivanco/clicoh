@@ -19,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ('datetime',)
+        fields = ('datetime','get_total', 'get_total_usd')
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):

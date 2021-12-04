@@ -1,5 +1,7 @@
 from django.db import models
 
+from .services import get_dollar_blue_value
+
 
 class Product(models.Model):
     name = models.CharField(max_length=120)
@@ -20,6 +22,19 @@ class Order(models.Model):
     class Meta:
         verbose_name_plural = "Ordenes"
         verbose_name = "Orden"
+
+    def get_total(self):
+        ods = OrderDetail.objects.filter(order_id=self.id)
+
+        return sum(float(od.product.price) * od.quantity for od in ods)
+
+    def get_total_usd(self):
+        pesos_value = self.get_total()
+
+        dolar_value = get_dollar_blue_value().replace(',','.')
+
+        dolar_price= pesos_value * float(dolar_value)
+        return dolar_price
 
 
 class OrderDetail(models.Model):
