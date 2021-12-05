@@ -26,23 +26,18 @@ class ProductSerializer(serializers.ModelSerializer):
         return price
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    detail = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = Order
-        fields = ('datetime', 'get_total', 'get_total_usd', 'detail')
-
-
 class OrderDetailSerializer(serializers.ModelSerializer):
+    #product = ProductSerializer(read_only=True)
+    product = serializers.StringRelatedField()
+
     class Meta:
         model = OrderDetail
         fields = '__all__'
 
-    included_serializers = {
-        'product': ProductSerializer,
-        'order': OrderSerializer,
-    }
+    # included_serializers = {
+    #      'product': ProductSerializer,
+    #      'order': OrderSerializer,
+    #  }
 
     def validate_quantity(self, quantity):
         if quantity <= 0:
@@ -57,3 +52,12 @@ class OrderDetailSerializer(serializers.ModelSerializer):
         # if OrderDetail.objects.filter(product__id = product.id).filter(id = obj.id).exists:
         #     raise serializers.ValidationError('El producto {} ya esta cargada en la orden.'.format(product))
         return product
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    # detail = serializers.StringRelatedField(many=True)
+    detail = OrderDetailSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ('datetime', 'get_total', 'get_total_usd', 'detail')

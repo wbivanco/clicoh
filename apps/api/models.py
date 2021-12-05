@@ -1,4 +1,6 @@
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
 
 from .services import get_dollar_blue_value
 
@@ -18,6 +20,9 @@ class Product(models.Model):
 
 class Order(models.Model):
     datetime = models.DateTimeField()
+
+    def __str__(self):
+        return '{}'.format(self.id)
 
     class Meta:
         verbose_name_plural = "Ordenes"
@@ -49,3 +54,23 @@ class OrderDetail(models.Model):
     class Meta:
         verbose_name_plural = "Detalle Ordenes"
         verbose_name = "Detalle Orden"
+
+
+@receiver(post_save, sender=OrderDetail)
+def orderdetail_save(sender, instance, **kwargs):
+    product_id = instance.product.id
+
+    prod = Product.objects.get(pk=product_id)
+    if prod:
+        prod.stock = int(prod.stock) - int(instance.quantity)
+        prod.save()
+
+
+@receiver(post_delete, sender=OrderDetail)
+def orderdetail_delete(sender, instance, **kwargs):
+    product_id = instance.product.id
+
+    prod = Product.objects.get(pk=product_id)
+    if prod:
+        prod.stock = int(prod.stock) + int(instance.quantity)
+        prod.save()
