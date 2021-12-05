@@ -40,7 +40,7 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     quantity = models.IntegerField()
 
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, related_name='detail', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
