@@ -9,6 +9,8 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def validate_name(self, name):
+        """ Valido que el nombre del producto no esté repetido."""
+
         name = name.lower()
 
         if Product.objects.filter(name=name).exists():
@@ -16,46 +18,44 @@ class ProductSerializer(serializers.ModelSerializer):
         return name
 
     def validate_stock(self, stock):
+        """ Valido que el stock del producto no sea negativo. """
+
         if stock < 0:
             raise serializers.ValidationError('El stock no puede ser negativo.')
         return stock
 
     def validate_price(self, price):
+        """ Valido que el precio del producto no sea genativo. """
+
         if price < 0:
             raise serializers.ValidationError('El precio no puede ser nagativo.')
         return price
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
-    #product = ProductSerializer(read_only=True)
-    product = serializers.StringRelatedField()
-
     class Meta:
         model = OrderDetail
         fields = '__all__'
 
-    # included_serializers = {
-    #      'product': ProductSerializer,
-    #      'order': OrderSerializer,
-    #  }
 
     def validate_quantity(self, quantity):
+        """ Valido que la cantidad a comprar sea mayor que cero."""
+
         if quantity <= 0:
             raise serializers.ValidationError('La cantidad debe ser mayor que 0.')
         return quantity
 
     def validate_product(self, product):
+        """ Valido que el producto tenga estock para la venta."""
+
         product = Product.objects.get(pk=product.id)
 
         if product.stock <= 0:
             raise serializers.ValidationError('No hay stock del producto {}.'.format(product.name))
-        # if OrderDetail.objects.filter(product__id = product.id).filter(id = obj.id).exists:
-        #     raise serializers.ValidationError('El producto {} ya esta cargada en la orden.'.format(product))
         return product
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    # detail = serializers.StringRelatedField(many=True)
     detail = OrderDetailSerializer(many=True, read_only=True)
 
     class Meta:

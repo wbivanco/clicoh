@@ -58,6 +58,7 @@ class OrderDetail(models.Model):
 
 @receiver(post_save, sender=OrderDetail)
 def orderdetail_save(sender, instance, **kwargs):
+    """ Resto la cantidad pedida del stock del producto."""
     product_id = instance.product.id
 
     prod = Product.objects.get(pk=product_id)
@@ -68,6 +69,7 @@ def orderdetail_save(sender, instance, **kwargs):
 
 @receiver(post_delete, sender=OrderDetail)
 def orderdetail_delete(sender, instance, **kwargs):
+    """ Sumo la cantidad pedida al stock del producto."""
     product_id = instance.product.id
 
     prod = Product.objects.get(pk=product_id)
