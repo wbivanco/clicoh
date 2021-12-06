@@ -60,6 +60,7 @@ DJANGO_APPS = [
 THIRD_APPS = [
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 PROJECT_APPS = [
@@ -178,6 +179,12 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer'
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
+    # Constante para activar la documentación de la API.
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # Esquema de autenticación global para la API.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 # --- ---
 
@@ -190,7 +197,3 @@ if ACTIVAR_HERRAMIENTAS_DESARROLLO:
     # Lo de abajo me permite ver los datos de forma mas amigable.
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ('rest_framework.renderers.BrowsableAPIRenderer',)
 # --- ---
-
-REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
-}
