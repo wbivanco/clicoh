@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 
+from rest_framework.documentation import include_docs_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apps.api.urls')),
+    path('', include_docs_urls(title='API Documentation')),
 ]
 
 """ Si estan activas las herramientas de desarrollo agrego la ruta a debug. """

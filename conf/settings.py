@@ -190,3 +190,7 @@ if ACTIVAR_HERRAMIENTAS_DESARROLLO:
     # Lo de abajo me permite ver los datos de forma mas amigable.
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ('rest_framework.renderers.BrowsableAPIRenderer',)
 # --- ---
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
