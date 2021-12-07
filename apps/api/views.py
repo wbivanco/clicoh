@@ -6,10 +6,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
 
-@api_view(['POST'])
-def login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
+def generate_token(username, password):
+    """ Genero el token y lo devuelvo. Está en un método separado para poder ser reutilzado. """
 
     try:
         user = User.objects.get(username=username)
@@ -22,5 +20,17 @@ def login(request):
         return Response("Contraseña inválida.")
 
     token, _ = Token.objects.get_or_create(user=user)
+
+    return token
+
+
+@api_view(['POST'])
+def login(request):
+    """ Genero el token con el usuario y clave pasado en el request. """
+
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    token = generate_token(username, password)
 
     return Response(token.key)

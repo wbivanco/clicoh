@@ -58,7 +58,6 @@ DJANGO_APPS = [
 ]
 
 THIRD_APPS = [
-    #'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -160,7 +159,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # ACTIVAR_HERRAMIENTAS_DESARROLLO = env.bool('ACTIVAR_HERRAMIENTAS_DESARROLLO', default=False)
-ACTIVAR_HERRAMIENTAS_DESARROLLO = False
+ACTIVAR_HERRAMIENTAS_DESARROLLO = True
 
 # --- DRF ---
 # Configuro para devolver los datos en formato jsonapi.
@@ -191,7 +190,7 @@ REST_FRAMEWORK = {
 
 # --- django-debug-toolba, django-extensions     ---
 if ACTIVAR_HERRAMIENTAS_DESARROLLO:
-    INSTALLED_APPS += ['debug_toolbar', 'django_extensions']
+    INSTALLED_APPS += ['debug_toolbar', 'django_extensions', 'django_filters',]
     MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
     INTERNAL_IPS = ['127.0.0.1']
     # Lo de abajo me permite ver los datos de forma mas amigable.
