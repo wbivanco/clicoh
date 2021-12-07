@@ -159,7 +159,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # ACTIVAR_HERRAMIENTAS_DESARROLLO = env.bool('ACTIVAR_HERRAMIENTAS_DESARROLLO', default=False)
-ACTIVAR_HERRAMIENTAS_DESARROLLO = True
+ACTIVAR_HERRAMIENTAS_DESARROLLO = False
 
 # --- DRF ---
 # Configuro para devolver los datos en formato jsonapi.
