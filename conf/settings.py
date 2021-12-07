@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-oyz1ug!*6-*(remun8)gr8ljsw9l*4p$cy(fr4k4qr29n9)0@w
 DEBUG = True
 # DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://clicoh-drf.herokuapp.com/']
 # ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 
