@@ -58,7 +58,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_APPS = [
-    'django_filters',
+    #'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
 ]
